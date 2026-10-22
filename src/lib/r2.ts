@@ -35,7 +35,7 @@ export async function uploadAudio({
       ContentType: contentType,
     }),
   );
-};
+}
 
 export async function deleteAudio(key: string): Promise<void> {
   await r2.send(
@@ -44,7 +44,7 @@ export async function deleteAudio(key: string): Promise<void> {
       Key: key,
     }),
   );
-};
+}
 
 export async function getSignedAudioUrl(key: string): Promise<string> {
   const command = new GetObjectCommand({
@@ -52,4 +52,4 @@ export async function getSignedAudioUrl(key: string): Promise<string> {
     Key: key,
   });
   return getSignedUrl(r2, command, { expiresIn: 3600 }); // 1 hour
-};
+}

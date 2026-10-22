@@ -18,7 +18,7 @@ function formatTime(seconds: number) {
   const m = Math.floor((seconds % 3600) / 60);
   const s = Math.floor(seconds % 60);
   return `${String(h).padStart(2, "0")}:${String(m).padStart(2, "0")}:${String(s).padStart(2, "0")}`;
-};
+}
 
 export function VoiceRecorder({
   file,
@@ -75,7 +75,6 @@ export function VoiceRecorder({
   if (file) {
     return (
       <div className="flex items-center gap-3 rounded-xl border p-4">
-
         <div className="flex size-10 items-center justify-center rounded-lg bg-muted">
           <FileAudio className="size-5 text-muted-foreground" />
         </div>
@@ -128,20 +127,16 @@ export function VoiceRecorder({
   if (isRecording) {
     return (
       <div className="flex flex-col overflow-hidden rounded-2xl border">
-         <div ref={containerRef} className="w-full" />
-         <div className="flex items-center justify-between border-t p-4">
-            <p className="text-[28px] font-semibold leading-[1.2] tracking-tight">
-              {formatTime(elapsedTime)}
-            </p>
-            <Button 
-              type="button" 
-              variant="destructive" 
-              onClick={handleStop}
-            >
-              <Square className="size-3" />
-              Stop
-            </Button>
-         </div>
+        <div ref={containerRef} className="w-full" />
+        <div className="flex items-center justify-between border-t p-4">
+          <p className="text-[28px] font-semibold leading-[1.2] tracking-tight">
+            {formatTime(elapsedTime)}
+          </p>
+          <Button type="button" variant="destructive" onClick={handleStop}>
+            <Square className="size-3" />
+            Stop
+          </Button>
+        </div>
       </div>
     );
   }
@@ -176,4 +171,4 @@ export function VoiceRecorder({
       </Button>
     </div>
   );
-};
+}

@@ -18,4 +18,4 @@ export function QuickActionsPanel() {
       </div>
     </div>
   );
-};
+}

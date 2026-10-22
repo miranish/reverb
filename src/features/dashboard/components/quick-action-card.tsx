@@ -37,12 +37,7 @@ export function QuickActionCard({
             {description}
           </p>
         </div>
-        <Button 
-          variant="outline" 
-          size="xs" 
-          className="w-fit" 
-          asChild
-        >
+        <Button variant="outline" size="xs" className="w-fit" asChild>
           <Link href={href}>
             Try now
             <ArrowRight className="size-3" />
@@ -50,5 +45,5 @@ export function QuickActionCard({
         </Button>
       </div>
     </div>
-  )
-};
+  );
+}

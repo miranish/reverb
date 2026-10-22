@@ -34,7 +34,7 @@ export type VoiceItem =
 
 interface VoiceCardProps {
   voice: VoiceItem;
-};
+}
 
 const regionNames = new Intl.DisplayNames(["en"], { type: "region" });
 
@@ -49,7 +49,7 @@ function parseLanguage(locale: string) {
   const region = regionNames.of(country) ?? country;
 
   return { flag, region };
-};
+}
 
 export function VoiceCard({ voice }: VoiceCardProps) {
   const [showDeleteDialog, setShowDeleteDialog] = useState(false);
@@ -86,7 +86,6 @@ export function VoiceCard({ voice }: VoiceCardProps) {
             className="size-14 border-[1.5px] border-white shadow-xs lg:size-18"
           />
         </div>
-
       </div>
 
       <div className="flex min-w-0 flex-1 flex-col gap-1.5 lg:gap-3">
@@ -126,11 +125,7 @@ export function VoiceCard({ voice }: VoiceCardProps) {
         </Button>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button 
-              variant="outline" 
-              size="icon-sm" 
-              className="rounded-full"
-            >
+            <Button variant="outline" size="icon-sm" className="rounded-full">
               <MoreHorizontal className="size-4" />
             </Button>
           </DropdownMenuTrigger>
@@ -190,4 +185,4 @@ export function VoiceCard({ voice }: VoiceCardProps) {
       </div>
     </div>
   );
-};
+}

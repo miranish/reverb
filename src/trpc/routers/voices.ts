@@ -16,20 +16,21 @@ export const voicesRouter = createTRPCRouter({
     .query(async ({ ctx, input }) => {
       const searchFilter = input?.query
         ? {
-          OR: [
-            { 
-              name: { 
-                contains: input.query, mode: "insensitive" as const
-              } 
-            },
-            {
-              description: {
-                contains: input.query,
-                mode: "insensitive" as const,
+            OR: [
+              {
+                name: {
+                  contains: input.query,
+                  mode: "insensitive" as const,
+                },
               },
-            },
-          ],
-        }
+              {
+                description: {
+                  contains: input.query,
+                  mode: "insensitive" as const,
+                },
+              },
+            ],
+          }
         : {};
 
       const [custom, system] = await Promise.all([
@@ -69,32 +70,32 @@ export const voicesRouter = createTRPCRouter({
       return { custom, system };
     }),
 
-    delete: orgProcedure
-      .input(z.object({ id: z.string() }))
-      .mutation(async ({ ctx, input }) => {
-        const voice = await prisma.voice.findUnique({
-          where: {
-            id: input.id,
-            variant: "CUSTOM",
-            orgId: ctx.orgId,
-          },
-          select: { id: true, r2ObjectKey: true },
+  delete: orgProcedure
+    .input(z.object({ id: z.string() }))
+    .mutation(async ({ ctx, input }) => {
+      const voice = await prisma.voice.findUnique({
+        where: {
+          id: input.id,
+          variant: "CUSTOM",
+          orgId: ctx.orgId,
+        },
+        select: { id: true, r2ObjectKey: true },
+      });
+
+      if (!voice) {
+        throw new TRPCError({
+          code: "NOT_FOUND",
+          message: "Voice not found",
         });
+      }
 
-        if (!voice) {
-          throw new TRPCError({
-            code: "NOT_FOUND",
-            message: "Voice not found",
-          });
-        }
+      await prisma.voice.delete({ where: { id: voice.id } });
 
-        await prisma.voice.delete({ where: { id: voice.id } });
+      if (voice.r2ObjectKey) {
+        // In production, consider background jobs, retires, cron jobs etc.
+        await deleteAudio(voice.r2ObjectKey).catch(() => {});
+      }
 
-        if (voice.r2ObjectKey) {
-          // In production, consider background jobs, retires, cron jobs etc.
-          await deleteAudio(voice.r2ObjectKey).catch(() => {});
-        }
-
-        return { success: true };
-      }),
+      return { success: true };
+    }),
 });

@@ -11,4 +11,4 @@ export function TextToSpeechLayout({
       {children}
     </div>
   );
-};
+}

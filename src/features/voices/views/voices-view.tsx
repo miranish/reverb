@@ -10,13 +10,8 @@ import { VoicesToolbar } from "../components/voices-toolbar";
 
 function VoicesContent() {
   const trpc = useTRPC();
-  const [query] = useQueryState(
-    "query",
-    voicesSearchParams.query
-  );
-  const { data } = useSuspenseQuery(
-    trpc.voices.getAll.queryOptions({ query })
-  );
+  const [query] = useQueryState("query", voicesSearchParams.query);
+  const { data } = useSuspenseQuery(trpc.voices.getAll.queryOptions({ query }));
 
   return (
     <>
@@ -24,7 +19,7 @@ function VoicesContent() {
       <VoicesList title="Built-in Voices" voices={data.system} />
     </>
   );
-};
+}
 
 export function VoicesView() {
   return (
@@ -33,4 +28,4 @@ export function VoicesView() {
       <VoicesContent />
     </div>
   );
-};
+}

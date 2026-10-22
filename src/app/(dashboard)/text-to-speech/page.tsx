@@ -19,4 +19,4 @@ export default async function TextToSpeechPage({
       <TextToSpeechView initialValues={{ text, voiceId }} />
     </HydrateClient>
   );
-};
+}

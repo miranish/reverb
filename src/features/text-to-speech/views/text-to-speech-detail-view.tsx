@@ -7,7 +7,7 @@ import { TextInputPanel } from "@/features/text-to-speech/components/text-input-
 import { SettingsPanel } from "@/features/text-to-speech/components/settings-panel";
 import {
   TextToSpeechForm,
-  type TTSFormValues
+  type TTSFormValues,
 } from "@/features/text-to-speech/components/text-to-speech-form";
 import { TTSVoicesProvider } from "../contexts/tts-voices-context";
 import { VoicePreviewPanel } from "../components/voice-preview-panel";
@@ -19,13 +19,10 @@ export function TextToSpeechDetailView({
   generationId: string;
 }) {
   const trpc = useTRPC();
-  const [ 
-    generationQuery,
-    voicesQuery,
-  ] = useSuspenseQueries({
+  const [generationQuery, voicesQuery] = useSuspenseQueries({
     queries: [
       trpc.generations.getById.queryOptions({ id: generationId }),
-      trpc.voices.getAll.queryOptions()
+      trpc.voices.getAll.queryOptions(),
     ],
   });
 
@@ -37,8 +34,7 @@ export function TextToSpeechDetailView({
 
   // Requested voice may no longer exist (deleted); fall back to first available
   const resolvedVoiceId =
-    data?.voiceId &&
-    allVoices.some((v) => v.id === data.voiceId)
+    data?.voiceId && allVoices.some((v) => v.id === data.voiceId)
       ? data.voiceId
       : fallbackVoiceId;
 
@@ -81,4 +77,4 @@ export function TextToSpeechDetailView({
       </TextToSpeechForm>
     </TTSVoicesProvider>
   );
-};
+}

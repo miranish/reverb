@@ -9,7 +9,7 @@ import { SettingsPanel } from "@/features/text-to-speech/components/settings-pan
 import {
   TextToSpeechForm,
   defaultTTSValues,
-  type TTSFormValues
+  type TTSFormValues,
 } from "@/features/text-to-speech/components/text-to-speech-form";
 import { TTSVoicesProvider } from "../contexts/tts-voices-context";
 
@@ -19,9 +19,7 @@ export function TextToSpeechView({
   initialValues?: Partial<TTSFormValues>;
 }) {
   const trpc = useTRPC();
-  const { 
-    data: voices,
-  } = useSuspenseQuery(trpc.voices.getAll.queryOptions());
+  const { data: voices } = useSuspenseQuery(trpc.voices.getAll.queryOptions());
 
   const { custom: customVoices, system: systemVoices } = voices;
 
@@ -54,4 +52,4 @@ export function TextToSpeechView({
       </TextToSpeechForm>
     </TTSVoicesProvider>
   );
-};
+}

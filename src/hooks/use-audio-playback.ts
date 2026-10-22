@@ -44,4 +44,4 @@ export function useAudioPlayback(src: string | File | null) {
   }, [src, isPlaying]);
 
   return { isPlaying, isLoading, togglePlay };
-};
+}

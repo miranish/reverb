@@ -32,12 +32,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Field, FieldError } from "@/components/ui/field";
-import { 
-  Tabs, 
-  TabsList, 
-  TabsTrigger, 
-  TabsContent
-} from "@/components/ui/tabs";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import {
   Select,
   SelectContent,
@@ -93,23 +88,21 @@ function FileDropzone({
 }) {
   const { isPlaying, togglePlay } = useAudioPlayback(file);
 
-  const {
-    getRootProps, getInputProps, isDragActive, isDragReject
-  } = useDropzone({
-    accept: { "audio/*": [] },
-    maxSize: 20 * 1024 * 1024,
-    multiple: false,
-    onDrop: (acceptedFiles) => {
-      if (acceptedFiles.length > 0) {
-        onFileChange(acceptedFiles[0]);
-      }
-    },
-  });
+  const { getRootProps, getInputProps, isDragActive, isDragReject } =
+    useDropzone({
+      accept: { "audio/*": [] },
+      maxSize: 20 * 1024 * 1024,
+      multiple: false,
+      onDrop: (acceptedFiles) => {
+        if (acceptedFiles.length > 0) {
+          onFileChange(acceptedFiles[0]);
+        }
+      },
+    });
 
   if (file) {
     return (
       <div className="flex items-center gap-3 rounded-xl border p-4">
-
         <div className="flex size-10 items-center justify-center rounded-lg bg-muted">
           <FileAudio className="size-5 text-muted-foreground" />
         </div>
@@ -172,13 +165,13 @@ function FileDropzone({
         </p>
       </div>
 
-       <Button type="button" variant="outline" size="sm">
-          <FolderOpen className="size-3.5" />
-          Upload file
-        </Button>
+      <Button type="button" variant="outline" size="sm">
+        <FolderOpen className="size-3.5" />
+        Upload file
+      </Button>
     </div>
-  )
-};
+  );
+}
 
 function LanguageCombobox({
   value,
@@ -245,13 +238,13 @@ function LanguageCombobox({
       </PopoverContent>
     </Popover>
   );
-};
+}
 
 interface VoiceCreateFormProps {
   scrollable?: boolean;
   footer?: (submit: React.ReactNode) => React.ReactNode;
   onError?: (message: string) => void;
-};
+}
 
 export function VoiceCreateForm({
   scrollable,
@@ -284,12 +277,11 @@ export function VoiceCreateForm({
         params.set("description", description);
       }
 
-      const response = 
-        await fetch(`/api/voices/create?${params.toString()}`, {
-          method: "POST",
-          headers: { "Content-Type": file.type },
-          body: file,
-        });
+      const response = await fetch(`/api/voices/create?${params.toString()}`, {
+        method: "POST",
+        headers: { "Content-Type": file.type },
+        body: file,
+      });
 
       if (!response.ok) {
         const body = await response.json();
@@ -313,23 +305,23 @@ export function VoiceCreateForm({
     },
     onSubmit: async ({ value }) => {
       try {
-         await createMutation.mutateAsync({
+        await createMutation.mutateAsync({
           name: value.name,
           file: value.file!,
           category: value.category,
           language: value.language,
           description: value.description || undefined,
-         });
+        });
 
-         toast.success("Voice created successfully!");
-         queryClient.invalidateQueries({
+        toast.success("Voice created successfully!");
+        queryClient.invalidateQueries({
           queryKey: trpc.voices.getAll.queryKey(),
         });
         form.reset();
       } catch (error) {
         const message =
           error instanceof Error ? error.message : "Failed to create voice";
-        
+
         if (onError) {
           onError(message);
         } else {
@@ -345,10 +337,7 @@ export function VoiceCreateForm({
         e.preventDefault();
         form.handleSubmit();
       }}
-      className={cn(
-        "flex flex-col", 
-        scrollable ? "min-h-0 flex-1" : "gap-6"
-      )}
+      className={cn("flex flex-col", scrollable ? "min-h-0 flex-1" : "gap-6")}
     >
       <div
         className={cn(
@@ -390,8 +379,7 @@ export function VoiceCreateForm({
                     />
                   </TabsContent>
                 </Tabs>
-                {isInvalid 
-                  && <FieldError errors={field.state.meta.errors} />}
+                {isInvalid && <FieldError errors={field.state.meta.errors} />}
               </Field>
             );
           }}
@@ -417,7 +405,6 @@ export function VoiceCreateForm({
                     onBlur={field.handleBlur}
                     className="pl-10"
                   />
-
                 </div>
                 {isInvalid && <FieldError errors={field.state.meta.errors} />}
               </Field>
@@ -432,7 +419,7 @@ export function VoiceCreateForm({
 
             return (
               <Field data-invalid={isInvalid}>
-<div className="relative flex items-center">
+                <div className="relative flex items-center">
                   <div className="pointer-events-none absolute left-0 flex h-full w-11 items-center justify-center">
                     <Layers className="size-4 text-muted-foreground" />
                   </div>
@@ -441,9 +428,7 @@ export function VoiceCreateForm({
                     onValueChange={(value) => field.handleChange(value ?? "")}
                   >
                     <SelectTrigger className="w-full pl-10">
-                      <SelectValue 
-                        placeholder="Select category..."
-                      />
+                      <SelectValue placeholder="Select category..." />
                     </SelectTrigger>
                     <SelectContent>
                       {VOICE_CATEGORIES.map((cat) => (
@@ -498,7 +483,6 @@ export function VoiceCreateForm({
                     className="min-h-20 pl-10"
                     rows={3}
                   />
-
                 </div>
                 {isInvalid && <FieldError errors={field.state.meta.errors} />}
               </Field>
@@ -510,18 +494,18 @@ export function VoiceCreateForm({
           selector={(s) => ({
             isSubmitting: s.isSubmitting,
           })}
-      >
-        {({ isSubmitting }) => {
-          const submitButton = (
-            <Button type="submit" disabled={isSubmitting}>
-              {isSubmitting ? "Creating..." : "Create Voice"}
-            </Button>
-          );
+        >
+          {({ isSubmitting }) => {
+            const submitButton = (
+              <Button type="submit" disabled={isSubmitting}>
+                {isSubmitting ? "Creating..." : "Create Voice"}
+              </Button>
+            );
 
-          return footer ? footer(submitButton) : submitButton;
-        }}
-      </form.Subscribe>
+            return footer ? footer(submitButton) : submitButton;
+          }}
+        </form.Subscribe>
       </div>
     </form>
-  )
-};
+  );
+}

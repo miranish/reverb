@@ -39,7 +39,11 @@ export function SettingsPanelSettings() {
                   </div>
                   <Slider
                     value={[field.state.value]}
-                    onValueChange={(value) => field.handleChange(value[0])}
+                    onValueChange={(value) =>
+                      field.handleChange(
+                        typeof value === "number" ? value : value[0],
+                      )
+                    }
                     min={slider.min}
                     max={slider.max}
                     step={slider.step}
@@ -54,4 +58,4 @@ export function SettingsPanelSettings() {
       </div>
     </>
   );
-};
+}

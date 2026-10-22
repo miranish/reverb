@@ -59,7 +59,7 @@ export function useAudioRecorder() {
       normalize: true,
     });
 
-    wsRef.current = ws
+    wsRef.current = ws;
 
     const record = ws.registerPlugin(
       RecordPlugin.create({
@@ -81,14 +81,13 @@ export function useAudioRecorder() {
       setAudioBlob(null);
       setElapsedTime(0);
 
-      const stream = await navigator.mediaDevices.getUserMedia({ 
-        audio: true
+      const stream = await navigator.mediaDevices.getUserMedia({
+        audio: true,
       });
       streamRef.current = stream;
 
-      const { default: RecordRTC, StereoAudioRecorder } = await import(
-        "recordrtc"
-      );
+      const { default: RecordRTC, StereoAudioRecorder } =
+        await import("recordrtc");
 
       const recorder = new RecordRTC(stream, {
         recorderType: StereoAudioRecorder,
@@ -152,4 +151,4 @@ export function useAudioRecorder() {
     stopRecording,
     resetRecording,
   };
-};
+}

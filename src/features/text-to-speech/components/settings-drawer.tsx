@@ -9,15 +9,13 @@ import {
   DrawerTrigger,
 } from "@/components/ui/drawer";
 
-import { 
-  SettingsPanelSettings
-} from "./settings-panel-settings";
+import { SettingsPanelSettings } from "./settings-panel-settings";
 
 interface SettingsDrawerProps {
   open?: boolean;
   onOpenChange?: (open: boolean) => void;
   children?: React.ReactNode;
-};
+}
 
 export function SettingsDrawer({
   open,
@@ -43,4 +41,4 @@ export function SettingsDrawer({
       </DrawerContent>
     </Drawer>
   );
-};
+}

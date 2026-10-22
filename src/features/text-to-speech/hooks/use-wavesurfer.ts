@@ -20,7 +20,7 @@ interface UseWaveSurferReturn {
   togglePlayPause: () => void;
   seekForward: (seconds?: number) => void;
   seekBackward: (seconds?: number) => void;
-};
+}
 
 export function useWaveSurfer({
   url,
@@ -125,4 +125,4 @@ export function useWaveSurfer({
     seekForward,
     seekBackward,
   };
-};
+}

@@ -25,7 +25,7 @@ export async function POST(request: Request) {
     return Response.json({ error: "Unauthorized" }, { status: 401 });
   }
 
-    // Check for active subscription before voice creation
+  // Check for active subscription before voice creation
   try {
     const customerState = await polar.customers.getStateExternal(orgId);
     const hasActiveSubscription =
@@ -183,4 +183,4 @@ export async function POST(request: Request) {
     { name, message: "Voice created successfully" },
     { status: 201 },
   );
-};
+}

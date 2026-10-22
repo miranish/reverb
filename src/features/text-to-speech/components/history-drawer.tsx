@@ -9,9 +9,7 @@ import {
   DrawerTrigger,
 } from "@/components/ui/drawer";
 
-import { 
-  SettingsPanelHistory
-} from "./settings-panel-history";
+import { SettingsPanelHistory } from "./settings-panel-history";
 
 export function HistoryDrawer() {
   return (
@@ -31,4 +29,4 @@ export function HistoryDrawer() {
       </DrawerContent>
     </Drawer>
   );
-};
+}

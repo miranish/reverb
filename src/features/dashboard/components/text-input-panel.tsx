@@ -7,9 +7,9 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 
-import { 
-  COST_PER_UNIT, 
-  TEXT_MAX_LENGTH
+import {
+  COST_PER_UNIT,
+  TEXT_MAX_LENGTH,
 } from "@/features/text-to-speech/data/constants";
 
 export function TextInputPanel() {
@@ -24,9 +24,11 @@ export function TextInputPanel() {
   };
 
   return (
-    <div className="
+    <div
+      className="
       rounded-[22px] bg-linear-185 from-[#ff8ee3] from-15% via-[#57d7e0] via-39% to-[#dbf1f2] to-85% p-0.5 shadow-[0_0_0_4px_white]
-    ">
+    "
+    >
       {/* Using px values for border-radius to ensure proper gradient border math (outer - padding = inner). */}
       {/* Standard classes like rounded-4xl use CSS calc() which doesn't align cleanly at corners. */}
       <div className="rounded-[20px] bg-[#F9F9F9] p-1">
@@ -58,7 +60,8 @@ export function TextInputPanel() {
               </span>
             </Badge>
             <span className="text-xs text-muted-foreground">
-              {text.length.toLocaleString()} / {TEXT_MAX_LENGTH.toLocaleString()} characters
+              {text.length.toLocaleString()} /{" "}
+              {TEXT_MAX_LENGTH.toLocaleString()} characters
             </span>
           </div>
         </div>
@@ -77,5 +80,5 @@ export function TextInputPanel() {
         </div>
       </div>
     </div>
-  )
+  );
 }

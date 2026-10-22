@@ -30,7 +30,7 @@ export const generationsRouter = createTRPCRouter({
         audioUrl: `/api/audio/${generation.id}`,
       };
     }),
-  
+
   getAll: orgProcedure.query(async ({ ctx }) => {
     const generations = await prisma.generation.findMany({
       where: { orgId: ctx.orgId },
@@ -53,14 +53,12 @@ export const generationsRouter = createTRPCRouter({
         topP: z.number().min(0).max(1).default(0.95),
         topK: z.number().min(1).max(10000).default(1000),
         repetitionPenalty: z.number().min(1).max(2).default(1.2),
-      })
+      }),
     )
     .mutation(async ({ input, ctx }) => {
       // Check for active subscription before generation
       try {
-        const customerState = await polar.customers.getStateExternal(
-          ctx.orgId,
-        );
+        const customerState = await polar.customers.getStateExternal(ctx.orgId);
         const hasActiveSubscription =
           (customerState.active_subscriptions ?? []).length > 0;
         if (!hasActiveSubscription) {
@@ -81,10 +79,7 @@ export const generationsRouter = createTRPCRouter({
       const voice = await prisma.voice.findUnique({
         where: {
           id: input.voiceId,
-          OR: [
-            { variant: "SYSTEM" },
-            { variant: "CUSTOM", orgId: ctx.orgId, }
-          ],
+          OR: [{ variant: "SYSTEM" }, { variant: "CUSTOM", orgId: ctx.orgId }],
         },
         select: {
           id: true,

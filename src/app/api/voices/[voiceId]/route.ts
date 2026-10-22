@@ -42,8 +42,7 @@ export async function GET(
     return new Response("Failed to fetch voice audio", { status: 502 });
   }
 
-  const contentType = 
-    audioResponse.headers.get("content-type") || "audio/wav";
+  const contentType = audioResponse.headers.get("content-type") || "audio/wav";
 
   return new Response(audioResponse.body, {
     headers: {
@@ -54,4 +53,4 @@ export async function GET(
           : "private, max-age=3600",
     },
   });
-};
+}

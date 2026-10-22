@@ -124,4 +124,4 @@ export function VoicePreviewMobile({
       </div>
     </div>
   );
-};
+}

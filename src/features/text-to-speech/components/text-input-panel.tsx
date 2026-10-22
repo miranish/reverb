@@ -11,9 +11,9 @@ import { Badge } from "@/components/ui/badge";
 import { Textarea } from "@/components/ui/textarea";
 import { useTypedAppFormContext } from "@/hooks/use-app-form";
 
-import { 
-  COST_PER_UNIT, 
-  TEXT_MAX_LENGTH
+import {
+  COST_PER_UNIT,
+  TEXT_MAX_LENGTH,
 } from "@/features/text-to-speech/data/constants";
 import { ttsFormOptions } from "./text-to-speech-form";
 import { GenerateButton } from "./generate-button";
@@ -70,8 +70,8 @@ export function TextInputPanel() {
               <span className="text-xs">
                 <span className="tabular-nums">
                   ${(text.length * COST_PER_UNIT).toFixed(4)}
-                </span>&nbsp;
-                estimated
+                </span>
+                &nbsp; estimated
               </span>
             </Badge>
             <div className="flex items-center gap-3">
@@ -99,4 +99,4 @@ export function TextInputPanel() {
       </div>
     </div>
   );
-};
+}

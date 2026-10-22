@@ -9,4 +9,4 @@ export function useVoiceAvatar(seed: string) {
       size: 128,
     }).toDataUri();
   }, [seed]);
-};
+}

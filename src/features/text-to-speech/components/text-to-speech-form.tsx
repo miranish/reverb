@@ -87,4 +87,4 @@ export function TextToSpeechForm({
   });
 
   return <form.AppForm>{children}</form.AppForm>;
-};
+}

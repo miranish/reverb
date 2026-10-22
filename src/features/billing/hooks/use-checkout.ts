@@ -4,11 +4,9 @@ import { useTRPC } from "@/trpc/client";
 
 export function useCheckout() {
   const trpc = useTRPC();
-  const mutation = useMutation(
-    trpc.billing.createCheckout.mutationOptions({})
-  );
+  const mutation = useMutation(trpc.billing.createCheckout.mutationOptions({}));
 
-    const checkout = useCallback(() => {
+  const checkout = useCallback(() => {
     mutation.mutate(undefined, {
       onSuccess: (data) => {
         window.location.href = data.checkoutUrl;
@@ -17,4 +15,4 @@ export function useCheckout() {
   }, [mutation]);
 
   return { checkout, isPending: mutation.isPending };
-};
+}

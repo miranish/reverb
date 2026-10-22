@@ -7,7 +7,7 @@ interface Slider {
   max: number;
   step: number;
   defaultValue: number;
-};
+}
 
 export const sliders: Slider[] = [
   {
@@ -20,7 +20,7 @@ export const sliders: Slider[] = [
     step: 0.1,
     defaultValue: 0.8,
   },
-    {
+  {
     id: "topP",
     label: "Voice Variety",
     leftLabel: "Stable",

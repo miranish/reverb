@@ -83,7 +83,7 @@ export function VoiceCreateDialog({
         </DrawerContent>
       </Drawer>
     );
-  };
+  }
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
@@ -99,4 +99,4 @@ export function VoiceCreateDialog({
       </DialogContent>
     </Dialog>
   );
-};
+}

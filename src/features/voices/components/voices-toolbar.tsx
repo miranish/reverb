@@ -13,10 +13,7 @@ import { voicesSearchParams } from "@/features/voices/lib/params";
 import { VoiceCreateDialog } from "./voice-create-dialog";
 
 export function VoicesToolbar() {
-  const [query, setQuery] = useQueryState(
-    "query",
-    voicesSearchParams.query
-  );
+  const [query, setQuery] = useQueryState("query", voicesSearchParams.query);
   const [localQuery, setLocalQuery] = useState(query);
 
   const debouncedSetQuery = useDebouncedCallback(
@@ -70,4 +67,4 @@ export function VoicesToolbar() {
       </div>
     </div>
   );
-};
+}
